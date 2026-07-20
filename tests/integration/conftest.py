@@ -5,6 +5,9 @@ def pytest_configure(config):
     config.addinivalue_line("markers","integration:marks tests as integration tests")
     config.addinivalue_line("markers","performance:marks tests as performance tests")
     config.addinivalue_line("markers","stress:marks tests as stress tests")
+    config.addinivalue_line("markers", "category:marks tests for categories")
+    config.addinivalue_line("markers", "review:marks tests for products")
+    config.addinivalue_line("markers", "product:marks tests for reviews")
 
 def pytest_collection_modifyitems(config,items):
     for item in items:
@@ -15,5 +18,6 @@ def pytest_collection_modifyitems(config,items):
         if "stress" in item.name.lower():
             item.add_marker(pytest.mark.stress)
             item.add_marker(pytest.mark.slow)
+
 
 

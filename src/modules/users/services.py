@@ -1,3 +1,5 @@
+from fastcrud.types import GetMultiResponseDict
+
 from .schemas import UserUpdate, UserRead, UserCreateInternal, UserCreate, User
 from .crud import crud_users
 from src.infrastructure.utils import get_password_hash
@@ -7,9 +9,9 @@ from typing import Any
 
 
 class UserService:
-    async def get_users_paginated(self, db: AsyncSession) -> dict[str, Any]:
+    async def get_users_paginated(self, db: AsyncSession,skip:int=0,limit:int=100) -> GetMultiResponseDict:
         data = await crud_users.get_multi(
-            db, schema_to_select=UserRead,
+            db,offset=skip,limit=limit,schema_to_select=UserRead,is_deleted=False
         )
         return data
 

@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Path, Body
 from fastapi.params import Depends
+from fastcrud import compute_offset, paginated_response
 
 from .schemas import UserRead, UserCreate, UserUpdate
 from typing import Any, Annotated
@@ -20,9 +21,9 @@ router = APIRouter(tags=["Users"])
         403: {"description": "Not authorized"},
     },
 )
-async def get_users(service: UserServiceDep, db: AsyncSessionDep):
-    return await service.get_users_paginated(db)
-
+async def get_users(service: UserServiceDep,db: AsyncSessionDep,page:int=1,items_per_age:int=10,)->dict[str,Any]:
+    users_data=await service.get_users_paginated(skip=compute_offset(page,items_per_age),limit=items_per_age,db=db)
+    return paginated_response(crud_data=users_data,page=page,items_per_page=items_per_age)
 
 @router.get(
     "/{user_name}",
