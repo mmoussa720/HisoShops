@@ -1,6 +1,7 @@
 from fastapi import APIRouter
-from ....modules.fighter.routes import router as fighter_router
-
+from ....modules.users.routes import router as users_router
+from ....infrastructure.auth.routes import router as auth_router
 
 router=APIRouter(prefix="/v1")
-router.include_router(fighter_router,prefix="/fighters")
+router.include_router(users_router,prefix="/users")
+router.include_router(auth_router,prefix="/auth")

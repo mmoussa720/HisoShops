@@ -7,7 +7,6 @@ from logging.config import fileConfig
 from sqlalchemy.ext.asyncio import async_engine_from_config
 from sqlalchemy import pool
 from alembic import context
-
 from src.infrastructure.database.session import Base
 
 # Alembic Config object
@@ -19,7 +18,7 @@ if config.config_file_name is not None:
 
 # IMPORTANT: import ALL models so they register in Base.metadata
 import src.modules  # make sure __init__.py imports all models
-
+import src.infrastructure
 target_metadata = Base.metadata
 
 

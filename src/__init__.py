@@ -1,3 +1,9 @@
 from . import infrastructure
+from . import modules
 from . import interfaces
-from .modules import fighter
+
+__all__ = [
+    "infrastructure",
+    "modules",
+    "interfaces",
+]
