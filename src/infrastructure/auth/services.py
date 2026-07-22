@@ -12,7 +12,6 @@ import os
 
 load_dotenv()
 
-
 class AuthService:
     async def login(self, request: Request, db: AsyncSession, service: UserService):
         user = await authenticate_user(

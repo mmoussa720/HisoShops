@@ -19,14 +19,19 @@ from src.modules.users.models import User
 from src.modules.categories.models import Category
 from src.modules.products.models import Product, ProductCategory
 from src.modules.reviews.models import Review
-
+import subprocess
 
 load_dotenv()
 
 
 def is_docker_running():
     try:
-        DockerClient()
+        subprocess.run(
+            ["podman", "info"],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            check=True
+        )
         return True
     except Exception:
         return False
